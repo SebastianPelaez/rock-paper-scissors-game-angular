@@ -1,0 +1,158 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+#main {
+  text-align: center;
+}
+
+#logo {
+  display: inline-block;
+  width: 500px;
+}
+
+.mt-2 {
+  margin-top: 30px;
+}
+
+.imgLogo {
+  width: 292px;
+  height: 125px;
+}
+
+mat-card {
+  width: 600px;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mr-2 {
+  margin-right: 10px;
+}
+
+.bigFont {
+  font-size: 30px;
+}
+
+.wi {
+  color: green;
+  font-size: 60px;
+}
+
+.lo {
+  color: red;
+  font-size: 60px;
+}
+
+.ti {
+  color: orange;
+  font-size: 60px;
+}
+
+.endPage {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  background-color: #fff;
+  z-index: 10;
+  text-align: center;
+  display: block
+}
+
+.centerPageDiv {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.hand {
+  cursor: pointer;
+}
+
+.titles {
+  color: #4298b5;
+}
+
+.tableContainer {
+  display: table;
+  border-collapse: collapse;
+}
+
+.tableRow {
+  display: table-row;
+}
+
+.left, .right, .middle {
+  display: table-cell;
+  padding: 5px;
+}
+
+.tcenter{
+  text-align: center;
+}
+
+.tableHeader{
+  border-bottom: 1px solid lightgrey;
+
+}
+
+.tableCell{
+  display: table-cell;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.tableRowCustom {
+  display: table-row;
+  border-bottom: 1px solid lightgrey;
+}
+
+.headerCell{
+  color:#4f639c;
+}
+
+.bigFont {
+  font-size: 40px;
+  color: #6485a2;
+  font-family: monospace;
+}
+
+.normalFont {
+  font-size: 20px;
+  color:  #4ba1ec;
+  font-family: monospace;
+}
+
+.gokus {
+  width: 300px;
+}
+
+.easterEgg{
+  cursor: url('../assets/linksword.png')  2 2, pointer;
+}
+
+.spinner{
+  animation: spin 2s ease-in-out infinite;
+  -webkit-animation: spin 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}

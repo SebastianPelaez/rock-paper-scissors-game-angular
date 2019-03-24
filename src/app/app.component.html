@@ -1,0 +1,210 @@
+<div id="main" class="mt-2">
+  <div id="logo">
+    <img (click)="enabledEasterEgg()" class="imgLogo" src="../assets/rock-paper-scissors-items.png">
+  </div>
+</div>
+
+<div class="container-fluid" [ngClass]="{'easterEgg':easterEgg}">
+  <div class="centered" [hidden]="gameStarted">
+    <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <mat-card-content>
+            <div class="centered">
+              <mat-form-field class="example-full-width mr-2">
+                <input #txtPlayerName matInput placeholder="Player one name" [(ngModel)]="playerName">
+              </mat-form-field>
+              <mat-form-field class="example-full-width ">
+                <input #txtPlayerName matInput placeholder="Player two name" [(ngModel)]="player2Name">
+              </mat-form-field>
+            </div>
+            <div class="centered">
+              <button class="mr-2" mat-raised-button color="primary" (click)="playWithMachine()">Man vs machine</button>
+              <button mat-raised-button color="primary" (click)="playWithFriend()">Man vs man</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="centered">
+    <div [hidden]="!gameStarted">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-6">
+
+              <h2>{{playerName}}</h2>
+              <div class="centered">
+                <mat-progress-spinner [color]="playerOneScoreColor" mode="determinate" [value]="playerOneScoreValue">
+                </mat-progress-spinner>
+              </div>
+              <div class="centered">
+                <h4>{{playerOneScoreValue / 20}}</h4>
+              </div>
+              <div class="centered mt-2 titles">
+                <h5>Choose an option!</h5>
+              </div>
+
+              <div class="centered mt-3">
+
+                <div [hidden]="!isP1Turn">
+                    <img #rock (click)="playerOnePick(0)" class="hand" src="../assets/hand_2_unselect.svg">
+                    <img #paper (click)="playerOnePick(1)" class="hand" src="../assets/hand_3_unselect.svg">
+                    <img #scissors (click)="playerOnePick(2)" class="hand" src="../assets/hand_4_unselect.svg">
+                </div>
+                <div [hidden]="isP1Turn">
+                  <div class="spinner">Waiting...</div>
+                  
+                </div>
+               
+
+              </div>
+
+            </div>
+
+            <div class="col-6">
+
+              <h2>{{player2Name}}</h2>
+              <div class="centered">
+                <mat-progress-spinner [color]="playerTwoScoreColor" mode="determinate" [value]="playerTwoScoreValue">
+                </mat-progress-spinner>
+              </div>
+              <div class="centered">
+                <h4>{{playerTwoScoreValue / 20}}</h4>
+              </div>
+              <div class="centered">
+                <h5 [hidden]="!firtsMove" class="mt-2 titles">Machine selected:</h5>
+              </div>
+
+              <div class="centered">
+                <h5 *ngIf="gameMode === 'vPlayer'" class="mt-2 titles">Choose an option!</h5>
+              </div>
+
+              <div class="centered mt-2">
+
+                <div *ngIf="gameMode === 'vMachine'">
+                  <img *ngIf="machineSelection === 0" class="hand" src="../assets/hand_2_unselect.svg">
+                  <img *ngIf="machineSelection === 1" class="hand" src="../assets/hand_3_unselect.svg">
+                  <img *ngIf="machineSelection === 2" class="hand" src="../assets/hand_4_unselect.svg">
+                </div>
+
+                <div *ngIf="gameMode === 'vPlayer'">
+                  <img #rock2 (click)="playerTwoPick(0)" class="hand" src="../assets/hand_2_unselect.svg">
+                  <img #paper2 (click)="playerTwoPick(1)" class="hand" src="../assets/hand_3_unselect.svg">
+                  <img #scissors2 (click)="playerTwoPick(2)" class="hand" src="../assets/hand_4_unselect.svg">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="gameMode === 'vPlayer'" class="centered mt-5">
+    <div class="tableContainer">
+      <div class="tableRow">
+        <div class="middle tcenter">
+          <span class="normalFont">Round {{currentRound}}</span>
+        </div>
+      </div>
+      <div class="tableRow">
+        <div class="middle tcenter">
+          <span class="normalFont">{{currentPlayer}} turn!</span>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="centered mt-5">
+    <span class="wi" *ngIf="finalResult == 1">{{lastWinningPlayer}} win!</span>
+    <span class="ti" *ngIf="finalResult == 0">tied!</span>
+  </div>
+
+  <div class="centered mt-2">
+    <div class="flex-container flex-center" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+  <!-- *ngIf="endGame" -->
+
+  <div *ngIf="endGame" class="endPage">
+    <div class="centered mt-2 centerPageDiv">
+
+      <div class="tableContainer">
+        <div class="tableRow">
+          <div class="middle">
+            <div class="tableContainer">
+              <div class="tableRow">
+                <div class="middle">
+                  <span class="bigFont">Congratulations!, '{{winningPlayer}}' is the new master of the universe! even
+                    cannot defeat goku's</span>
+                </div>
+              </div>
+              <div class="tableRow">
+                <div class="middle">
+                  <img class="gokus" src="../assets/gokus.jpg">
+                </div>
+              </div>
+              <div class="tableRow">
+                <div class="middle">
+                  <button (click)="playAgain()" mat-raised-button color="primary">Play again!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tableRow">
+          <div class="middle">
+            <div class="centered mt-2">
+              Game summary:
+            </div>
+          </div>
+        </div>
+        <div class="tableRow">
+          <div class="middle">
+            <div class="centered mt-2">
+              <div class="tableContainer">
+                <div class="tableRow tableHeader">
+                  <div class="tableCell headerCell">
+                    Round
+                  </div>
+                  <div class="tableCell headerCell">
+                    Player 1
+                  </div>
+                  <div class="tableCell headerCell">
+                    Player 2
+                  </div>
+                  <div class="tableCell headerCell">
+                    Winner
+                  </div>
+                </div>
+                <div class="tableRowCustom" *ngFor="let game of gamesSummary">
+                  <div class="tableCell">
+                    {{game.Round}}
+                  </div>
+                  <div class="tableCell">
+                    {{game.PlayerOneName}}
+                  </div>
+                  <div class="tableCell">
+                    {{game.PlayerTwoName}}
+                  </div>
+                  <div class="tableCell">
+                    {{game.Winner}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
