@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
       setTimeout( () => {
         this.loading = false;        
         const randomNum =  Math.floor(Math.random() * 3 ) ;
-        this.machineSelection = randomNum;
+        this.machineSelection = randomNum;        
         this.validateResult();      
       },  Math.floor(Math.random()  * 500 ) +200);
 
@@ -114,11 +114,11 @@ export class AppComponent implements OnInit {
     this.startFight();
   }
 
-
   validateResult(){
 
     if(this.machineSelection == this.playerOneSelection){
       this.finalResult = 0;
+      this.lastWinningPlayer = "Tied"
     }else if((this.playerOneSelection - this.machineSelection + 3)% 3 == 1){      
       this.finalResult = 1;
       this.playerOneScoreValue += 20;
@@ -131,6 +131,17 @@ export class AppComponent implements OnInit {
       this.lastWinningPlayer = this.player2Name;
       this.validateFinalWinner();      
     }
+
+    this.gamesSummary.push({ 
+      Round: this.currentRound,
+      PlayerOneName: this.playerName, 
+      PlayerOneOption: this.playerOneSelection,    
+      PlayerTwoName: this.player2Name,   
+      PlayerTwoOption: this.machineSelection,
+      Winner: this.lastWinningPlayer
+    })
+
+    this.currentRound ++;
 
   }
   validateFinalWinner(){
